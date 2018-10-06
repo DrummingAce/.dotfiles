@@ -1,0 +1,130 @@
+[colors]
+transparent = #00000000
+background = #131B26
+foreground = #F3F4F5
+inactive-text = #818D92
+accent = #C67C6F
+alert = #C44444
+
+[bar/master]
+monitor = ${env:MONITOR}
+width = 100%
+height = 30
+background = ${colors.transparent}
+foreground = ${colors.foreground}
+font-0 = "Consolas:pixelsize=11:antialias=true;1"
+font-1 = "Consolas:pixelsize=11:antialias=true;1"
+
+[bar/top]
+inherit = bar/master
+modules-left = i3
+modules-right = memory cpu volume powermenu date time
+
+border-top-size = 4
+border-left-size = 0
+border-right-size = 20
+
+module-margin-left = 0
+module-margin-right = 0
+padding-left = 0
+padding-right = 0
+
+[module/i3]
+type = internal/i3
+enable-click = true
+enable-scroll = false
+strip-wsnumbers = true
+pin-workspaces = true
+
+format-background = ${colors.background}
+
+label-visible-background = ${colors.background}
+label-visible-foreground = ${colors.inactive-text}
+label-visible-padding = 2
+
+label-focused-background = ${colors.accent}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 2
+
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.inactive-text}
+label-unfocused-padding = 2
+
+label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-padding = 2
+
+format-margin = 2
+
+[module/time]
+type = internal/date
+interval = 40
+label = %time%
+time = %H:%M
+format-padding = 3
+format-background = ${colors.accent}
+
+[module/date]
+type = internal/date
+interval = 1200
+label = %date%
+date = %A, %d %B
+format-padding = 3
+format-background = ${colors.background}
+
+[module/powermenu]
+type = custom/menu
+label-open = "System"
+label-open-font = 4
+label-close = "Close"
+label-separator = " - "
+
+menu-0-0 = "Reboot"
+menu-0-0-exec = systemctl reboot
+menu-0-1 = "Shutdown"
+menu-0-1-exec = systemctl poweroff
+menu-0-2 = "Logout"
+menu-0-2-exec = i3-msg exit
+
+format-padding = 4
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+format-margin = 3
+
+[module/volume]
+type = internal/pulseaudio
+label-volume = vol %percentage%%
+format-volume-padding = 2
+format-volume-background = ${colors.accent}
+format-volume-foreground = ${colors.foreground}
+format-volume-margin = 0
+
+[module/cpu]
+type = internal/cpu
+label = cpu %percentage%%
+format-padding = 2
+format-background = ${colors.accent}
+format-foreground = ${colors.foreground}
+format-margin = 0
+
+[module/memory]
+type = internal/memory
+label = ram %gb_used%
+format-padding = 2
+format-background = ${colors.accent}
+format-foreground = ${colors.foreground}
+format-margin = 0
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+mount-1 = /home
+mount-2 = /var
+label-mounted = %mountpoint%: %percentage_free%% of %total%
+format-padding = 2
+format-background = ${colors.accent}
+format-foreground = ${colors.foreground}
+format-margin = 0
+
+vim:ft=dosini
+
