@@ -1,0 +1,58 @@
+-------------------- installing i3-gaps ----------------------
+sudo apt-get install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev dh-autoreconf
+
+git clone --recursive https://github.com/Airblader/xcb-util...
+cd xcb-util-xrm/
+./autogen.sh
+make
+sudo make install
+
+sudo bash
+cat (right facing angle bracket) /etc/ld.so.conf.d/i3.conf 
+/usr/local/lib/
+ctrl+D
+
+sudo ldconfig
+sudo ldconfig -p
+
+git clone https://www.github.com/Airblader/i3 i3-gaps
+cd i3-gaps
+autoreconf --force --install
+rm -Rf build/
+mkdir build
+cd build/
+ ../configure --prefix=/usr --sysconfdir=/etc
+ make
+ sudo make install
+ which i3
+ ls -l /usr/bin/i3
+
+-------------------installing termite -----------------------
+sudo apt install -y g++ libgtk-3-dev gtk-doc-tools gnutls-bin valac intltool libpcre2-dev libglib3.0-cil-dev libgnutls28-dev libgirepository1.0-dev libxml2-utils gperf build-essential
+git clone https://github.com/thestinger/vte-ng.git
+echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
+cd vte-ng && ./autogen.sh && make && sudo make install 
+cd ..
+
+git clone --recursive https://github.com/thestinger/termite.git
+cd termite && make && sudo make install
+sudo ldconfig
+sudo mkdir -p /lib/terminfo/x
+sudo ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
+
+cd ~/.config && mkdir termite
+cp /etc/xdg/termite/config ~/.config/termite/config
+
+----------------------- installing zsh ---------------------------
+sudo apt-get install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+chsh -s $(which zsh)
+sudo apt-get install fonts-powerline
+
+------------------------- installing polybar -----------------------
+sudo apt-get install feh compton cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev
+git clone https://github.com/jaagr/polybar.git
+cd polybar && ./build.sh
+
+--------------------- vim stuff --------------------
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
